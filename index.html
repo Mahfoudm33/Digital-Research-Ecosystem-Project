@@ -20,12 +20,12 @@
         --cream:    #fffdf9;
         --border:   #ddd8cf;
 
-        /* platform palette */
-        --col-qatar:    #8A1538;
-        --col-algeria:  #1a5c2e;
-        --col-arab:     #7a5208;
-        --col-islam:    #1a2e6e;
-        --col-peninsula:#4a3420;
+        /* platform palette — bright enough to read on dark backgrounds */
+        --col-qatar:    #c9274f;
+        --col-algeria:  #2ea855;
+        --col-arab:     #c98a18;
+        --col-islam:    #3d6bcc;
+        --col-peninsula:#b07d52;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -359,12 +359,21 @@
         letter-spacing: 1px;
     }
     .card-enter {
-        font-size: 11.5px; font-weight: 700;
-        color: var(--card-color, var(--maroon));
-        display: flex; align-items: center; gap: 5px;
-        transition: gap 0.2s;
+        font-size: 11px; font-weight: 700;
+        color: #fff;
+        background: var(--card-color, var(--maroon));
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 6px 13px;
+        border-radius: 3px;
+        transition: gap 0.2s, opacity 0.2s, transform 0.2s;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
     }
-    .platform-card:hover .card-enter { gap: 9px; }
+    .platform-card:hover .card-enter {
+        gap: 10px;
+        opacity: 0.88;
+        transform: translateX(2px);
+    }
 
     /* ── THEMES SECTION ───────────────────────────── */
     .themes-grid {
@@ -609,7 +618,8 @@
                 <div class="meta-row"><div class="meta-dot"></div><strong>Institution:</strong>&nbsp;Qatar University, College of Sport Sciences</div>
                 <div class="meta-row"><div class="meta-dot"></div><strong>ORCID:</strong>&nbsp;<a href="https://orcid.org/0000-0002-1418-6710" target="_blank" rel="noopener noreferrer">0000-0002-1418-6710</a></div>
                 <div class="meta-row"><div class="meta-dot"></div><strong>Languages:</strong>&nbsp;English · Arabic · French</div>
-                
+                <div class="meta-row"><div class="meta-dot"></div><strong>External Examiner:</strong>&nbsp;Loughborough University · University of Bordeaux</div>
+                <div class="meta-row"><div class="meta-dot"></div><strong>Reviewer:</strong>&nbsp;IOC Olympic Studies Centre · SSHRC Canada · NWO Netherlands</div>
             </div>
         </div>
     </div>
@@ -630,7 +640,7 @@
     <div class="platforms-grid" role="list">
 
         <!-- 1. QATAR -->
-        <a href="https://mahfoudm33.github.io/Sport-in-Qatar-Research-Project/"
+        <a href="https://mahfoudm33.github.io/Sport-Policy-Society-Qatar/"
            target="_blank" rel="noopener noreferrer"
            class="platform-card reveal reveal-delay-1"
            style="--card-color: var(--col-qatar);"
