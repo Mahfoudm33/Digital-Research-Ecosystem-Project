@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof. Mahfoud Amara — Digital Research Ecosystem</title>
+    <meta name="description" content="The Digital Research Ecosystem of Prof. Mahfoud Amara — Associate Professor, Qatar University. Mapping sport, power, identity, and geopolitics across the MENA region.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+    /* ── RESET & ROOT ─────────────────────────────── */
+    :root {
+        --maroon:   #8A1538;
+        --maroon-d: #6b0f2b;
+        --gold:     #D4AF37;
+        --gold-lt:  #f5e6b8;
+        --sand:     #f9f6f0;
+        --ink:      #111010;
+        --ink-soft: #2a2420;
+        --cream:    #fffdf9;
+        --border:   #ddd8cf;
+
+        /* platform palette */
+        --col-qatar:    #8A1538;
+        --col-algeria:  #1a5c2e;
+        --col-arab:     #7a5208;
+        --col-islam:    #1a2e6e;
+        --col-peninsula:#4a3420;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(--ink); overflow-x: hidden; }
+
+    /* ── ACCESSIBILITY ────────────────────────────── */
+    .skip { position: absolute; top: -999px; left: 10px; background: var(--maroon); color: #fff; padding: 10px 18px; font-weight: 700; z-index: 9999; border-radius: 0 0 6px 6px; text-decoration: none; }
+    .skip:focus { top: 0; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+    /* ── STICKY NAV ───────────────────────────────── */
+    .site-nav {
+        position: sticky; top: 0; z-index: 200;
+        background: rgba(10, 3, 7, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(212,175,55,0.18);
+        padding: 0 40px;
+        display: flex; align-items: center; justify-content: space-between;
+        height: 56px;
+    }
+    .nav-brand {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 17px; font-weight: 700;
+        color: #fff; letter-spacing: 0.3px;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+        color: rgba(255,255,255,0.65);
+        text-decoration: none; font-size: 11px; font-weight: 600;
+        padding: 5px 10px; border-radius: 3px;
+        transition: color 0.2s, background 0.2s;
+        white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--gold); background: rgba(212,175,55,0.1); }
+    .nav-orcid {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px; color: rgba(212,175,55,0.6);
+        border: 1px solid rgba(212,175,55,0.2);
+        padding: 4px 10px; border-radius: 3px;
+        text-decoration: none; transition: 0.2s;
+    }
+    .nav-orcid:hover { color: var(--gold); border-color: rgba(212,175,55,0.5); }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0205 0%, #1c0710 35%, #2e0d1a 60%, #1a0710 100%);
+        display: flex; align-items: center;
+        overflow: hidden;
+        padding: 80px 40px 80px 8vw;
+    }
+
+    /* Geometric texture background */
+    .hero-geo {
+        position: absolute; inset: 0; z-index: 0;
+        background:
+            repeating-linear-gradient(0deg,   transparent, transparent 59px, rgba(212,175,55,0.035) 59px, rgba(212,175,55,0.035) 60px),
+            repeating-linear-gradient(90deg,  transparent, transparent 59px, rgba(212,175,55,0.035) 59px, rgba(212,175,55,0.035) 60px),
+            repeating-linear-gradient(45deg,  transparent, transparent 41px, rgba(212,175,55,0.02)  41px, rgba(212,175,55,0.02)  42px),
+            repeating-linear-gradient(-45deg, transparent, transparent 41px, rgba(212,175,55,0.02)  41px, rgba(212,175,55,0.02)  42px);
+    }
+    /* Radial vignette */
+    .hero-geo::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: radial-gradient(ellipse 70% 80% at 30% 50%, transparent 0%, rgba(10,2,5,0.6) 100%);
+    }
+
+    /* Decorative rotating star (right side) */
+    .hero-star {
+        position: absolute; right: -60px; top: 50%;
+        transform: translateY(-50%);
+        width: min(620px, 58vw); height: min(620px, 58vw);
+        opacity: 0.18;
+        animation: starSpin 80s linear infinite;
+        z-index: 1; pointer-events: none;
+    }
+    .hero-star-inner {
+        position: absolute; inset: 40px;
+        opacity: 0.6;
+        animation: starSpin 50s linear infinite reverse;
+    }
+    @keyframes starSpin {
+        from { transform: translateY(-50%) rotate(0deg); }
+        to   { transform: translateY(-50%) rotate(360deg); }
+    }
+    /* Fix inner star position (not inheriting parent translate) */
+    .hero-star-inner { transform: none; animation: starSpinInner 50s linear infinite reverse; }
+    @keyframes starSpinInner { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* Hero text */
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+
+    .hero-sup {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 11px; color: var(--gold);
+        letter-spacing: 2.5px; text-transform: uppercase;
+        margin-bottom: 18px; opacity: 0;
+        animation: fadeUp 0.7s 0.2s ease forwards;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .hero-sup::before {
+        content: ''; display: inline-block;
+        width: 28px; height: 1px; background: var(--gold);
+    }
+    .hero-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(58px, 7vw, 96px);
+        font-weight: 700; line-height: 0.95;
+        color: #fff; letter-spacing: -1px;
+        margin-bottom: 6px; opacity: 0;
+        animation: fadeUp 0.8s 0.4s ease forwards;
+    }
+    .hero-name em { font-style: italic; color: rgba(255,255,255,0.75); }
+    .hero-divider {
+        width: 52px; height: 2px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+        margin: 22px 0 20px; opacity: 0;
+        animation: fadeUp 0.6s 0.6s ease forwards;
+    }
+    .hero-role {
+        font-size: 14px; font-weight: 600;
+        color: rgba(255,255,255,0.55);
+        letter-spacing: 0.3px; margin-bottom: 4px;
+        opacity: 0; animation: fadeUp 0.7s 0.7s ease forwards;
+        text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px;
+    }
+    .hero-position {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(18px, 2.5vw, 26px);
+        font-weight: 400; font-style: italic;
+        color: rgba(255,255,255,0.82); line-height: 1.4;
+        margin-bottom: 30px; opacity: 0;
+        animation: fadeUp 0.7s 0.85s ease forwards;
+    }
+    .hero-tags {
+        display: flex; flex-wrap: wrap; gap: 8px;
+        margin-bottom: 36px; opacity: 0;
+        animation: fadeUp 0.7s 1.05s ease forwards;
+    }
+    .hero-tag {
+        font-size: 10.5px; font-weight: 700;
+        color: rgba(212,175,55,0.85);
+        border: 1px solid rgba(212,175,55,0.3);
+        padding: 5px 12px; border-radius: 2px;
+        letter-spacing: 0.8px; text-transform: uppercase;
+        background: rgba(212,175,55,0.06);
+    }
+    .hero-cta {
+        display: inline-flex; align-items: center; gap: 10px;
+        background: var(--maroon); color: #fff;
+        padding: 14px 26px; border-radius: 4px;
+        font-size: 13px; font-weight: 700;
+        text-decoration: none; letter-spacing: 0.3px;
+        box-shadow: 0 8px 30px rgba(138,21,56,0.4);
+        transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        opacity: 0; animation: fadeUp 0.7s 1.2s ease forwards;
+    }
+    .hero-cta:hover { background: var(--maroon-d); transform: translateY(-2px); box-shadow: 0 12px 35px rgba(138,21,56,0.5); }
+    .hero-cta svg { transition: transform 0.2s; }
+    .hero-cta:hover svg { transform: translateX(3px); }
+
+    .hero-scroll {
+        position: absolute; bottom: 32px; left: 8vw;
+        display: flex; align-items: center; gap: 10px;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 9px; color: rgba(255,255,255,0.3);
+        letter-spacing: 2px; text-transform: uppercase;
+        z-index: 2; opacity: 0;
+        animation: fadeUp 0.6s 1.5s ease forwards;
+    }
+    .scroll-line {
+        width: 1px; height: 40px;
+        background: linear-gradient(180deg, rgba(212,175,55,0.5), transparent);
+        animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION SHARED ───────────────────────────── */
+    .section { padding: 90px 8vw; }
+    .section-alt { background: var(--cream); }
+    .section-dark { background: var(--ink-soft); }
+    .section-maroon { background: var(--maroon); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    .eyebrow {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px; font-weight: 400;
+        letter-spacing: 2.5px; text-transform: uppercase;
+        color: var(--gold); margin-bottom: 12px;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .eyebrow::before { content:''; display:inline-block; width:20px; height:1px; background:var(--gold); }
+    .eyebrow-light { color: rgba(212,175,55,0.7); }
+    .eyebrow-light::before { background: rgba(212,175,55,0.7); }
+
+    .section-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(34px, 4vw, 54px);
+        font-weight: 700; line-height: 1.1;
+        letter-spacing: -0.5px;
+    }
+    .section-title-light { color: #fff; }
+    .section-title-dark  { color: var(--ink); }
+
+    /* ── IDENTITY SECTION ─────────────────────────── */
+    .identity-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px; align-items: start;
+        margin-top: 52px;
+    }
+    .identity-quote {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(22px, 2.8vw, 34px);
+        font-weight: 600; font-style: italic;
+        line-height: 1.45; color: var(--maroon);
+        border-left: 3px solid var(--gold);
+        padding-left: 26px;
+    }
+    .identity-body { font-size: 15px; line-height: 1.8; color: #444; }
+    .identity-body p { margin-bottom: 16px; }
+    .identity-body p:last-child { margin-bottom: 0; }
+    .identity-meta {
+        display: flex; flex-direction: column; gap: 10px;
+        margin-top: 28px; padding-top: 24px;
+        border-top: 1px solid var(--border);
+    }
+    .meta-row {
+        display: flex; align-items: center; gap: 10px;
+        font-size: 12.5px; color: #666;
+    }
+    .meta-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--maroon); flex-shrink: 0;
+    }
+    .meta-row strong { color: var(--ink); font-weight: 700; }
+    .meta-row a { color: var(--maroon); text-decoration: none; font-weight: 600; }
+    .meta-row a:hover { text-decoration: underline; }
+
+    /* ── PLATFORMS SECTION ────────────────────────── */
+    .platforms-intro {
+        display: flex; justify-content: space-between;
+        align-items: flex-end; margin-bottom: 52px;
+        gap: 30px; flex-wrap: wrap;
+    }
+    .platforms-intro p {
+        font-size: 15px; color: rgba(255,255,255,0.55);
+        max-width: 400px; line-height: 1.7;
+    }
+
+    .platforms-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .platform-card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 6px;
+        padding: 30px 28px;
+        text-decoration: none;
+        display: flex; flex-direction: column;
+        position: relative; overflow: hidden;
+        transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+        cursor: pointer;
+    }
+    .platform-card::before {
+        content: '';
+        position: absolute; top: 0; left: 0; bottom: 0;
+        width: 3px;
+        background: var(--card-color, var(--maroon));
+        border-radius: 3px 0 0 3px;
+        transition: width 0.25s;
+    }
+    .platform-card:hover {
+        background: rgba(255,255,255,0.07);
+        border-color: rgba(255,255,255,0.15);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+    .platform-card:hover::before { width: 4px; }
+
+    .card-region {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 9px; letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--card-color, var(--maroon));
+        margin-bottom: 14px; opacity: 0.9;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .card-region::after {
+        content: ''; flex: 1; height: 1px;
+        background: var(--card-color, var(--maroon)); opacity: 0.25;
+    }
+
+    .card-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 22px; font-weight: 700;
+        color: #fff; line-height: 1.2;
+        margin-bottom: 10px;
+    }
+    .card-desc {
+        font-size: 13px; line-height: 1.7;
+        color: rgba(255,255,255,0.48);
+        flex: 1; margin-bottom: 22px;
+    }
+    .card-footer {
+        display: flex; justify-content: space-between;
+        align-items: center; padding-top: 16px;
+        border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .card-count {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px; color: rgba(255,255,255,0.35);
+        letter-spacing: 1px;
+    }
+    .card-enter {
+        font-size: 11.5px; font-weight: 700;
+        color: var(--card-color, var(--maroon));
+        display: flex; align-items: center; gap: 5px;
+        transition: gap 0.2s;
+    }
+    .platform-card:hover .card-enter { gap: 9px; }
+
+    /* ── THEMES SECTION ───────────────────────────── */
+    .themes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px; margin-top: 52px;
+    }
+    .theme-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 26px 24px;
+        position: relative;
+    }
+    .theme-num {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 52px; font-weight: 700;
+        color: rgba(138,21,56,0.07);
+        line-height: 1;
+        position: absolute; top: 12px; right: 18px;
+    }
+    .theme-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 18px; font-weight: 700;
+        color: var(--maroon); margin-bottom: 8px;
+        line-height: 1.2;
+    }
+    .theme-desc {
+        font-size: 13px; line-height: 1.65; color: #666;
+    }
+
+    /* ── STATS SECTION ────────────────────────────── */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 1px; background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 6px; overflow: hidden;
+        margin-top: 52px;
+    }
+    .stat-cell {
+        background: rgba(138,21,56,0.9);
+        padding: 36px 28px;
+        text-align: center;
+    }
+    .stat-number {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(42px, 5vw, 64px);
+        font-weight: 700; color: #fff;
+        line-height: 1; margin-bottom: 6px;
+        display: flex; align-items: flex-start; justify-content: center;
+    }
+    .stat-number .suffix {
+        font-size: 0.45em; margin-top: 8px;
+        color: var(--gold); font-weight: 400;
+    }
+    .stat-label {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 9px; letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.5);
+    }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+        background: #070205;
+        border-top: 1px solid rgba(212,175,55,0.15);
+        padding: 52px 8vw 36px;
+    }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 50px; margin-bottom: 40px;
+    }
+    .footer-brand {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 26px; font-weight: 700;
+        color: #fff; margin-bottom: 12px; line-height: 1.2;
+    }
+    .footer-brand span { color: var(--gold); }
+    .footer-tagline {
+        font-size: 13px; color: rgba(255,255,255,0.38);
+        line-height: 1.6; max-width: 340px;
+    }
+    .footer-col h4 {
+        font-size: 10px; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 1.5px;
+        color: rgba(212,175,55,0.65); margin-bottom: 14px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a {
+        color: rgba(255,255,255,0.45); text-decoration: none;
+        font-size: 13px; transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom {
+        padding-top: 24px;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        display: flex; justify-content: space-between; align-items: center;
+        flex-wrap: wrap; gap: 10px;
+    }
+    .footer-copy {
+        font-size: 11.5px; color: rgba(255,255,255,0.22);
+    }
+    .footer-orcid {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px; color: rgba(212,175,55,0.45);
+        text-decoration: none; border: 1px solid rgba(212,175,55,0.15);
+        padding: 4px 10px; border-radius: 3px;
+        transition: 0.2s;
+    }
+    .footer-orcid:hover { color: var(--gold); border-color: rgba(212,175,55,0.45); }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media(max-width: 900px) {
+        .site-nav { padding: 0 20px; }
+        .nav-links { display: none; }
+        .hero { padding: 60px 24px; }
+        .hero-star { display: none; }
+        .section { padding: 60px 24px; }
+        .identity-grid { grid-template-columns: 1fr; gap: 36px; }
+        .footer-grid { grid-template-columns: 1fr 1fr; }
+        .footer-grid > :first-child { grid-column: 1 / -1; }
+    }
+    @media(max-width: 600px) {
+        .footer-grid { grid-template-columns: 1fr; }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── REDUCED MOTION ───────────────────────────── */
+    @media(prefers-reduced-motion: reduce) {
+        .hero-star, .hero-star-inner { animation: none; }
+        .scroll-line { animation: none; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+        .hero-sup, .hero-name, .hero-divider, .hero-role, .hero-position,
+        .hero-tags, .hero-cta, .hero-scroll { animation: none; opacity: 1; transform: none; }
+    }
+    </style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav class="site-nav" aria-label="Site navigation">
+    <span class="nav-brand">Mahfoud <span>Amara</span></span>
+    <div class="nav-links" role="list">
+        <a href="#platforms" role="listitem">Platforms</a>
+        <a href="#themes" role="listitem">Research Themes</a>
+        <a href="https://mahfoudm33.github.io/Dr-Mahfoud-Amara-webpage-/index.html" target="_blank" rel="noopener noreferrer" role="listitem">Academic Profile</a>
+    </div>
+    <a href="https://orcid.org/0000-0002-1418-6710" target="_blank" rel="noopener noreferrer" class="nav-orcid" aria-label="ORCID profile">ORCID 0000-0002-1418-6710</a>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ══════════════════════════════ -->
+<section class="hero" aria-labelledby="hero-heading" id="main">
+    <div class="hero-geo" aria-hidden="true"></div>
+
+    <!-- Rotating Islamic star polygon -->
+    <div class="hero-star" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <!-- Outer rings -->
+            <circle cx="100" cy="100" r="96" stroke="rgba(212,175,55,0.5)" stroke-width="0.5"/>
+            <circle cx="100" cy="100" r="78" stroke="rgba(212,175,55,0.35)" stroke-width="0.5"/>
+            <circle cx="100" cy="100" r="58" stroke="rgba(212,175,55,0.25)" stroke-width="0.5"/>
+            <!-- 8-pointed star -->
+            <polygon points="100,4 114,66 164,36 134,86 196,100 134,114 164,164 114,134 100,196 86,134 36,164 66,114 4,100 66,86 36,36 86,66"
+                     stroke="rgba(212,175,55,0.6)" stroke-width="0.6" fill="rgba(212,175,55,0.04)"/>
+            <!-- Outer octagon -->
+            <polygon points="100,4 160,40 196,100 160,160 100,196 40,160 4,100 40,40"
+                     stroke="rgba(212,175,55,0.25)" stroke-width="0.5" fill="none"/>
+            <!-- Inner compass lines -->
+            <line x1="100" y1="4"   x2="100" y2="196" stroke="rgba(212,175,55,0.12)" stroke-width="0.4"/>
+            <line x1="4"   y1="100" x2="196" y2="100" stroke="rgba(212,175,55,0.12)" stroke-width="0.4"/>
+            <line x1="36"  y1="36"  x2="164" y2="164" stroke="rgba(212,175,55,0.1)"  stroke-width="0.4"/>
+            <line x1="164" y1="36"  x2="36"  y2="164" stroke="rgba(212,175,55,0.1)"  stroke-width="0.4"/>
+            <!-- Centre -->
+            <circle cx="100" cy="100" r="5"  fill="rgba(212,175,55,0.4)"/>
+            <circle cx="100" cy="100" r="2"  fill="rgba(212,175,55,0.8)"/>
+        </svg>
+        <div class="hero-star-inner">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <polygon points="100,30 111,72 148,52 124,86 162,100 124,114 148,148 111,128 100,170 89,128 52,148 76,114 38,100 76,86 52,52 89,72"
+                         stroke="rgba(212,175,55,0.35)" stroke-width="0.5" fill="rgba(212,175,55,0.03)"/>
+                <circle cx="100" cy="100" r="42" stroke="rgba(212,175,55,0.2)" stroke-width="0.5"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="hero-content">
+        <p class="hero-sup" aria-label="Digital Research Ecosystem">Digital Research Ecosystem</p>
+
+        <h1 class="hero-name" id="hero-heading">
+            Mahfoud<br><em>Amara</em>
+        </h1>
+
+        <div class="hero-divider" aria-hidden="true"></div>
+
+        <p class="hero-role">Associate Professor · Qatar University · College of Sport Sciences</p>
+
+        <p class="hero-position">
+            Mapping the political, cultural, and economic<br>
+            dimensions of sport across the MENA region
+        </p>
+
+        <div class="hero-tags" role="list" aria-label="Research focus areas">
+            <span class="hero-tag" role="listitem">Sport &amp; Geopolitics</span>
+            <span class="hero-tag" role="listitem">Identity &amp; Nation-building</span>
+            <span class="hero-tag" role="listitem">Media &amp; Discourse</span>
+            <span class="hero-tag" role="listitem">Sport Governance</span>
+            <span class="hero-tag" role="listitem">Postcolonial Theory</span>
+        </div>
+
+        <a href="#platforms" class="hero-cta" aria-label="Explore the research ecosystem platforms">
+            Explore the Ecosystem
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+        <div class="scroll-line"></div>
+        Scroll
+    </div>
+</section>
+
+<!-- ════════════════════════════ IDENTITY ════════════════════════════ -->
+<section class="section section-alt" aria-labelledby="identity-heading">
+    <div class="eyebrow reveal">Scholarly Identity</div>
+    <h2 class="section-title section-title-dark reveal reveal-delay-1" id="identity-heading">
+        A Scholar at the Crossroads<br>of Sport, Power &amp; Culture
+    </h2>
+
+    <div class="identity-grid">
+        <blockquote class="identity-quote reveal reveal-delay-2">
+            "Sport is not merely a physical activity — it is a site where power is reproduced, identities are contested, and geopolitical strategies are enacted."
+        </blockquote>
+        <div class="identity-body reveal reveal-delay-3">
+            <p>Professor Mahfoud Amara is a transnational "bridge scholar" operating at the intersection of Algeria/North Africa, Western academia, and Qatar/the Gulf — translating concepts across Arabic, English, and French, and across disciplinary traditions, to contribute to the decolonisation and pluralisation of sport knowledge.</p>
+            <p>His work rejects reductionist and Orientalist frameworks. It foregrounds locally grounded interpretations of sport in Arab and Muslim societies, centres regional agency in debates too often dominated by Global North perspectives, and brings postcolonial and critical theory to bear on the very real governance structures shaping sport today.</p>
+            <div class="identity-meta">
+                <div class="meta-row"><div class="meta-dot"></div><strong>Institution:</strong>&nbsp;Qatar University, College of Sport Sciences</div>
+                <div class="meta-row"><div class="meta-dot"></div><strong>ORCID:</strong>&nbsp;<a href="https://orcid.org/0000-0002-1418-6710" target="_blank" rel="noopener noreferrer">0000-0002-1418-6710</a></div>
+                <div class="meta-row"><div class="meta-dot"></div><strong>Languages:</strong>&nbsp;English · Arabic · French</div>
+                <div class="meta-row"><div class="meta-dot"></div><strong>External Examiner:</strong>&nbsp;Loughborough University · University of Bordeaux</div>
+                <div class="meta-row"><div class="meta-dot"></div><strong>Reviewer:</strong>&nbsp;IOC Olympic Studies Centre · SSHRC Canada · NWO Netherlands</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════ PLATFORMS ═══════════════════════════ -->
+<section class="section section-dark" id="platforms" aria-labelledby="platforms-heading">
+    <div class="platforms-intro">
+        <div>
+            <div class="eyebrow eyebrow-light reveal">The Research Ecosystem</div>
+            <h2 class="section-title section-title-light reveal reveal-delay-1" id="platforms-heading">
+                Five Interactive<br>Research Platforms
+            </h2>
+        </div>
+        <p class="reveal reveal-delay-2">Each platform maps a distinct but interrelated strand of a twenty-year body of scholarship. Click to enter.</p>
+    </div>
+
+    <div class="platforms-grid" role="list">
+
+        <!-- 1. QATAR -->
+        <a href="https://mahfoudm33.github.io/Sport-Policy-Society-Qatar/"
+           target="_blank" rel="noopener noreferrer"
+           class="platform-card reveal reveal-delay-1"
+           style="--card-color: var(--col-qatar);"
+           role="listitem"
+           aria-label="The Corniche Walk — Sport, Policy and Society in Qatar">
+            <div class="card-region">Qatar &amp; GCC</div>
+            <div class="card-title">The Corniche Walk</div>
+            <p class="card-desc">Sport, policy and society in Qatar: nine publications (2005–2024) tracing the evolution of the Qatari sport system from the Asian Games to the FIFA World Cup, mapped along the Doha waterfront.</p>
+            <div class="card-footer">
+                <span class="card-count">9 PUBLICATIONS · 2005–2024</span>
+                <span class="card-enter">Enter <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+        </a>
+
+        <!-- 2. ALGERIA -->
+        <a href="https://mahfoudm33.github.io/Sport-and-Algerian-Studies/"
+           target="_blank" rel="noopener noreferrer"
+           class="platform-card reveal reveal-delay-2"
+           style="--card-color: var(--col-algeria);"
+           role="listitem"
+           aria-label="Sport and Algerian Studies platform">
+            <div class="card-region">Algeria &amp; North Africa</div>
+            <div class="card-title">Sport &amp; Algerian Studies</div>
+            <p class="card-desc">Sport, identity and political culture in Algeria: publications spanning the colonial era, national liberation, the Black Decade, and the Hirak movement — accessed through an interactive stadium metaphor.</p>
+            <div class="card-footer">
+                <span class="card-count">HISTORICAL · CONTEMPORARY</span>
+                <span class="card-enter">Enter <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+        </a>
+
+        <!-- 3. ARAB WORLD -->
+        <a href="https://mahfoudm33.github.io/Dr-Mahfoud-Amara-Publications-Arab-World/"
+           target="_blank" rel="noopener noreferrer"
+           class="platform-card reveal reveal-delay-3"
+           style="--card-color: var(--col-arab);"
+           role="listitem"
+           aria-label="Arab World Publications platform">
+            <div class="card-region">Arab World · Regional</div>
+            <div class="card-title">Arab World Publications</div>
+            <p class="card-desc">A regional panorama of sport and society across the Arab world: governance, mega-events, gender, and postcolonial narratives from North Africa to the Gulf — situating the local within the global.</p>
+            <div class="card-footer">
+                <span class="card-count">REGIONAL · COMPARATIVE</span>
+                <span class="card-enter">Enter <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+        </a>
+
+        <!-- 4. ISLAM -->
+        <a href="https://mahfoudm33.github.io/Sport-in-Islam-and-Muslim-Communities-Project/"
+           target="_blank" rel="noopener noreferrer"
+           class="platform-card reveal reveal-delay-4"
+           style="--card-color: var(--col-islam);"
+           role="listitem"
+           aria-label="Sport in Islam and Muslim Communities platform">
+            <div class="card-region">Islam &amp; Muslim Communities</div>
+            <div class="card-title">Sport in Islam &amp;<br>Muslim Communities</div>
+            <p class="card-desc">The intersection of sport, Islamic values, and Muslim community life: global perspectives examining how faith shapes physical culture and how sport becomes a site of identity negotiation beyond the Arab world.</p>
+            <div class="card-footer">
+                <span class="card-count">GLOBAL · INTERDISCIPLINARY</span>
+                <span class="card-enter">Enter <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+        </a>
+
+        <!-- 5. PENINSULA ARCHIVE -->
+        <a href="https://mahfoudm33.github.io/Dr-Mahfoud-Amara-in-the-Peninsula-/"
+           target="_blank" rel="noopener noreferrer"
+           class="platform-card reveal reveal-delay-5"
+           style="--card-color: var(--col-peninsula);"
+           role="listitem"
+           aria-label="The Peninsula Archive platform">
+            <div class="card-region">Media Archive · Qatar</div>
+            <div class="card-title">The Peninsula Archive</div>
+            <p class="card-desc">A media archive tracking sport, society, and politics in Qatar through The Peninsula — one of the country's most prominent English-language dailies — as a source for discourse analysis and cultural history.</p>
+            <div class="card-footer">
+                <span class="card-count">DISCOURSE · MEDIA ANALYSIS</span>
+                <span class="card-enter">Enter <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- ════════════════════════════ THEMES ══════════════════════════════ -->
+<section class="section" id="themes" aria-labelledby="themes-heading">
+    <div class="eyebrow reveal">Research Architecture</div>
+    <h2 class="section-title section-title-dark reveal reveal-delay-1" id="themes-heading">
+        Five Core Research Themes
+    </h2>
+
+    <div class="themes-grid">
+        <div class="theme-card reveal reveal-delay-1">
+            <div class="theme-num" aria-hidden="true">01</div>
+            <h3 class="theme-title">Sport, Power &amp; Geopolitics</h3>
+            <p class="theme-desc">Foregrounding regional agency in debates about sport diplomacy, soft power, and mega-event hosting — moving beyond the reductive lens of "sportswashing" to examine how states in the Global South use sport as a strategic instrument.</p>
+        </div>
+        <div class="theme-card reveal reveal-delay-2">
+            <div class="theme-num" aria-hidden="true">02</div>
+            <h3 class="theme-title">Sport, Identity &amp; Nation-building</h3>
+            <p class="theme-desc">Biographical and socio-historical approaches to how sport constructs national, ethnic, religious, and diasporic identities in Algeria, Qatar, and across the Arab world.</p>
+        </div>
+        <div class="theme-card reveal reveal-delay-3">
+            <div class="theme-num" aria-hidden="true">03</div>
+            <h3 class="theme-title">Media, Discourse &amp; Counter-narratives</h3>
+            <p class="theme-desc">Critical discourse analysis (CDA) informed by Said's Orientalism and Foucauldian frameworks, examining how Western media constructs the Arab sporting subject and how counter-narratives emerge.</p>
+        </div>
+        <div class="theme-card reveal reveal-delay-4">
+            <div class="theme-num" aria-hidden="true">04</div>
+            <h3 class="theme-title">Sport Development, Ethics &amp; Governance</h3>
+            <p class="theme-desc">Analysis of sport development policy in emerging nations, anti-doping governance through WADA and national agencies, and the political economy of international sport organisations.</p>
+        </div>
+        <div class="theme-card reveal reveal-delay-5">
+            <div class="theme-num" aria-hidden="true">05</div>
+            <h3 class="theme-title">Gender &amp; Local Voices in MENA Sport</h3>
+            <p class="theme-desc">Critiquing homogenised Western narratives about gender in Arab sport; centring locally grounded epistemologies, women athletes' voices, and the complexity of change in culturally specific contexts.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════ STATS ═══════════════════════════════ -->
+<section class="section section-maroon" aria-labelledby="stats-heading">
+    <div class="eyebrow eyebrow-light reveal" style="--gold: #f5e6b8;">By the Numbers</div>
+    <h2 class="section-title section-title-light reveal reveal-delay-1" id="stats-heading">
+        Twenty Years of Scholarship
+    </h2>
+
+    <div class="stats-grid reveal reveal-delay-2" role="list">
+        <div class="stat-cell" role="listitem">
+            <div class="stat-number" aria-label="More than 40 indexed publications">
+                <span class="counter" data-target="40">0</span>
+                <span class="suffix">+</span>
+            </div>
+            <div class="stat-label">Indexed Publications</div>
+        </div>
+        <div class="stat-cell" role="listitem">
+            <div class="stat-number" aria-label="5 interactive research platforms">
+                <span class="counter" data-target="5">0</span>
+            </div>
+            <div class="stat-label">Research Platforms</div>
+        </div>
+        <div class="stat-cell" role="listitem">
+            <div class="stat-number" aria-label="20 years of research 2005 to 2024">
+                <span class="counter" data-target="20">0</span>
+            </div>
+            <div class="stat-label">Years of Research</div>
+        </div>
+        <div class="stat-cell" role="listitem">
+            <div class="stat-number" aria-label="3 languages of scholarship">
+                <span class="counter" data-target="3">0</span>
+            </div>
+            <div class="stat-label">Languages of Scholarship</div>
+        </div>
+        <div class="stat-cell" role="listitem">
+            <div class="stat-number" aria-label="4 research areas">
+                <span class="counter" data-target="4">0</span>
+            </div>
+            <div class="stat-label">Thematic Research Areas</div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════ FOOTER ══════════════════════════════ -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="footer-brand">Prof. Mahfoud <span>Amara</span></div>
+            <p class="footer-tagline">Associate Professor of Sport Social Sciences and Management, Qatar University. Bridging global and local knowledge systems to reposition sport as a key site for understanding power, identity, and geopolitical transformation in the MENA region.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Research Platforms</h4>
+            <ul>
+                <li><a href="https://mahfoudm33.github.io/Sport-Policy-Society-Qatar/" target="_blank" rel="noopener noreferrer">Qatar — The Corniche Walk</a></li>
+                <li><a href="https://mahfoudm33.github.io/Sport-and-Algerian-Studies/" target="_blank" rel="noopener noreferrer">Algeria &amp; North Africa</a></li>
+                <li><a href="https://mahfoudm33.github.io/Dr-Mahfoud-Amara-Publications-Arab-World/" target="_blank" rel="noopener noreferrer">Arab World Publications</a></li>
+                <li><a href="https://mahfoudm33.github.io/Sport-in-Islam-and-Muslim-Communities-Project/" target="_blank" rel="noopener noreferrer">Sport in Islam &amp; Muslim Communities</a></li>
+                <li><a href="https://mahfoudm33.github.io/Dr-Mahfoud-Amara-in-the-Peninsula-/" target="_blank" rel="noopener noreferrer">The Peninsula Archive</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="https://mahfoudm33.github.io/Dr-Mahfoud-Amara-webpage-/index.html" target="_blank" rel="noopener noreferrer">Academic Profile</a></li>
+                <li><a href="https://orcid.org/0000-0002-1418-6710" target="_blank" rel="noopener noreferrer">ORCID Profile</a></li>
+                <li><a href="https://www.qu.edu.qa/sport/staff/mahfoud-amara" target="_blank" rel="noopener noreferrer">Qatar University</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 Prof. Mahfoud Amara · Qatar University · All rights reserved</span>
+        <a href="https://orcid.org/0000-0002-1418-6710" target="_blank" rel="noopener noreferrer" class="footer-orcid">ORCID 0000-0002-1418-6710</a>
+    </div>
+</footer>
+
+<script>
+/* ── SCROLL REVEAL ───────────────────────────── */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            observer.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── COUNT-UP ────────────────────────────────── */
+function countUp(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
+        el.textContent = Math.round(ease * target);
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+    }
+    requestAnimationFrame(tick);
+}
+
+const statObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.querySelectorAll('.counter').forEach(countUp);
+            statObserver.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+const statsGrid = document.querySelector('.stats-grid');
+if (statsGrid) statObserver.observe(statsGrid);
+
+/* ── SMOOTH SCROLL FOR ANCHOR LINKS ──────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+});
+</script>
+</body>
+</html>
