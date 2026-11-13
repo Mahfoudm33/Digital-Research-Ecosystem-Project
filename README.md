@@ -1,8 +1,8 @@
-# Digital Research Ecosystem — Prof. Mahfoud Amara
+# Digital Research Ecosystem — Dr. Mahfoud Amara
 
 > *Mapping sport, power, identity, and geopolitics across the MENA region through open, accessible, visual scholarship.*
 
-**Associate Professor of Sport Social Sciences and Management**  
+**Associate Professor in Sport Management and Social Sciences**  
 College of Sport Sciences · Qatar University  
 ORCID: [0000-0002-1418-6710](https://orcid.org/0000-0002-1418-6710)
 
@@ -52,7 +52,7 @@ mahfoudm33.github.io/
 │
 ├── index.html                          ← Central Hub (this repository)
 │
-├── Sport-Policy-Society-Qatar/
+├── Sport-in-Qatar-Research-Project/
 │   └── index.html                      ← The Corniche Walk
 │
 ├── Sport-and-Algerian-Studies/
@@ -90,8 +90,8 @@ The atrium of the ecosystem. Introduces the scholarly identity, positions the fi
 ---
 
 ### 3.2 The Corniche Walk — Sport, Policy & Society in Qatar
-**Repository:** `Sport-Policy-Society-Qatar`  
-**URL:** `https://mahfoudm33.github.io/Sport-Policy-Society-Qatar/`  
+**Repository:** `Sport-in-Qatar-Research-Project`  
+**URL:** `https://mahfoudm33.github.io/Sport-in-Qatar-Research-Project/`  
 **Coverage:** 9 publications · 2005–2024  
 **Metaphor:** Publications are placed as markers along the Doha Corniche waterfront
 
@@ -256,10 +256,10 @@ The ecosystem is organised around five interlocking research themes, each cross-
 
 ### 7.2 Deploying a Platform
 
-1. Create a new GitHub repository (e.g., `Sport-Policy-Society-Qatar`)
+1. Create a new GitHub repository (e.g., `Sport-in-Qatar-Research-Project`)
 2. Upload the platform's `index.html` as the only file (or in a `/docs` folder if preferred)
 3. Enable GitHub Pages from **Settings → Pages**
-4. The platform will be live at `https://mahfoudm33.github.io/Sport-Policy-Society-Qatar/`
+4. The platform will be live at `https://mahfoudm33.github.io/Sport-in-Qatar-Research-Project/`
 
 ### 7.3 Linking Between Platforms
 
@@ -268,7 +268,7 @@ All inter-platform links use absolute URLs. To update a link in the central hub,
 The ecosystem nav bar (present on all platforms) uses the same link set:
 
 ```html
-<a href="https://mahfoudm33.github.io/Sport-Policy-Society-Qatar/">The Corniche Walk</a>
+<a href="https://mahfoudm33.github.io/Sport-in-Qatar-Research-Project/">The Corniche Walk</a>
 <a href="https://mahfoudm33.github.io/Sport-and-Algerian-Studies/">Sport & Algerian Studies</a>
 <!-- etc. -->
 ```
@@ -401,7 +401,7 @@ All DOI links point to publisher pages. Copyright in the underlying publications
 
 <div align="center">
 
-**Prof. Mahfoud Amara**  
+**Dr. Mahfoud Amara**  
 *Qatar University · College of Sport Sciences*  
 [orcid.org/0000-0002-1418-6710](https://orcid.org/0000-0002-1418-6710)
 
